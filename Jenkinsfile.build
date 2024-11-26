@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("build") {
             steps {
-                sh 'docker build . -t ivan-git-ai/django_build:latest -t ivan-git-ai/django_build:${GIT_COMMIT} '
+                sh 'docker build . -t ivan-git-ai/django_demo_site:latest -t ivan-git-ai/django_demo_site:${GIT_COMMIT} '
             }
         }
     }
