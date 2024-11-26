@@ -1,12 +1,9 @@
 pipeline {
-    agent {
-        docker { image 'docker:stable' }
-    }
-
+    agent any
     stages {
-        stage("install deps") {
+        stage("build") {
             steps {
-                sh 'docker build . -t django_demo_site '
+                sh 'docker build . -t ivan-git-ai/django_build:latest -t ivan-git-ai/django_build:${GIT_COMMIT} '
             }
         }
     }
