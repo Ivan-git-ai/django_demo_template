@@ -1,9 +1,12 @@
 pipeline {
     agent any
+    enviroment{
+        IMAGE_NAME = 'ivan-git-ai/django_demo'
+    }
     stages {
         stage("build") {
             steps {
-                sh 'docker build . -t ivan-git-ai/django_demo:latest -t ivan-git-ai/django_demo:${GIT_COMMIT} '
+                sh 'docker build . -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:${GIT_COMMIT} '
             }
         }
     }
