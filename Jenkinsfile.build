@@ -1,0 +1,13 @@
+pipeline {
+    agent {
+        docker { image 'docker:stable' }
+    }
+
+    stages {
+        stage("install deps") {
+            steps {
+                sh 'docker build . -t django_demo_site '
+            }
+        }
+    }
+}
