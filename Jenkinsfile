@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        IMAGE_NAME = 'Ivan-git-ai/django_demo_template'
+        GIT_COMMIT = 'c6918b04713325c1428dc2a7536b14569d7b2b2f' 
+    }
     stages {
         stage('Run Tests Pipeline') {
             steps {
@@ -7,28 +11,30 @@ pipeline {
                       parameters: [
                           string(name: 'GIT_URL', value: 'https://github.com/Ivan-git-ai/django_demo_template.git'),
                           string(name: 'GIT_BRANCH', value: 'main'),
-                          string(name: 'GIT_COMMIT', value: '') 
+                          string(name: 'GIT_COMMIT', value: '')
                       ]
             }
         }
         stage('Run Build Pipeline') {
             steps {
-                build job: 'lib/django build parametrized',
+                build job: 'lib/django-build-parametrized',
                       parameters: [
                           string(name: 'GIT_URL', value: 'https://github.com/Ivan-git-ai/django_demo_template.git'),
                           string(name: 'GIT_BRANCH', value: 'main'),
-                          string(name: 'GIT_COMMIT_HASH', value: '92bad5c42bb69b1e0e344fd25c5a7945a09dc399'),
-                          string(name: 'IMAGE_NAME', value: 'Ivan-git-ai/django_demo_template')
+                          string(name: 'GIT_COMMIT_HASH', value: GIT_COMMIT),
+                          string(name: 'IMAGE_NAME', value: IMAGE_NAME)
                       ]
             }
         }
-        stage('push'){
+        stage('Push Docker Image') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: "Ivan_docker_hub", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh 'docker login -u ${DOCKER_USERNAME} p ${DOCKER_PASSWORD}'
-                        sh 'docker push ${IMAGE_NAME}:latest'
-                        sh 'docker push ${IMAGE_NAME}:${GIT_COMMIT}'
+                        sh '''
+                            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                        '''
+                        sh "docker push ${IMAGE_NAME}:latest"
+                        sh "docker push ${IMAGE_NAME}:${GIT_COMMIT}"
                     }
                 }
             }
