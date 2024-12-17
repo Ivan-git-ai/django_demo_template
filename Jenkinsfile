@@ -22,5 +22,16 @@ pipeline {
                       ]
             }
         }
+        stage('push'){
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "Ivan_docker_hub", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh 'docker login -u {DOCKER_USERNAME} -p {DOCKER_PASSWORD}'
+                        sh 'docker push ${IMAGE_NAME}:latest'
+                        sh 'docker push ${IMAGE_NAME}:${GIT_COMMIT}'
+                    }
+                }
+            }
+        }
     }
 }
