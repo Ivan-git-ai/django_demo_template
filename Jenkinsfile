@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = "ivan-git-ai/django_demo"
+        IMAGE_NAME = "Ivan-git-ai/django_demo_template"
     }
     stages {
         stage("test") {
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 withCredentials(
                     [
-                        usernamePassword(usernameVariable: 'LOGIN', passwordVariable: 'PASSWORD', credentialsId: 'ivan-git-ai_github_key')
+                        usernamePassword(usernameVariable: 'LOGIN', passwordVariable: 'PASSWORD', credentialsId: 'Ivan_docker_hub')
                         ]
                     ) {
                         sh 'docker login -u ${LOGIN} -p ${PASSWORD}'
