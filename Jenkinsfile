@@ -28,7 +28,7 @@ pipeline {
             steps {
                 withCredentials(
                     [
-                        usernamePassword(usernameVariable: 'LOGIN', passwordVariable: 'PASSWORD', credentialsId: 'iorp_dockerhub')
+                        usernamePassword(usernameVariable: 'LOGIN', passwordVariable: 'PASSWORD', credentialsId: 'ivan-git-ai_github_key')
                         ]
                     ) {
                         sh 'docker login -u ${LOGIN} -p ${PASSWORD}'
