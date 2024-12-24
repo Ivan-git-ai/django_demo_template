@@ -31,7 +31,7 @@ pipeline {
                         usernamePassword(usernameVariable: 'LOGIN', passwordVariable: 'PASSWORD', credentialsId: 'Ivan_docker_hub')
                         ]
                     ) {
-                        sh 'docker login -u ${LOGIN} -p ${PASSWORD}'
+                        sh 'docker login -u ivanegorov22 -p I05260922van'
                         sh 'docker push ${IMAGE_NAME}:latest'
                         sh 'docker push ${IMAGE_NAME}:${GIT_COMMIT}'
                     }
