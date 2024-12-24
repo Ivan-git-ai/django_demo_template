@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = "Ivan-git-ai/django_demo_template"
+        IMAGE_NAME = "ivan-git-ai/django_demo"
     }
     stages {
         stage("test") {
