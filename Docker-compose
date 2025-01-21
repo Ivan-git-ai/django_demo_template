@@ -1,0 +1,6 @@
+version: "3"
+services:
+  backend:
+    image: ivanegorov22/django_deno:latest
+    ports:
+      - "8092:80"
