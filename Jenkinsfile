@@ -41,7 +41,7 @@ pipeline {
             steps {
                 withCredentials(
                     [
-                        sshUserPrivateKey(credentialsId: "ivan-git-ai", keyFileVariable: 'KEY_FILE', usernameVariable:'USERNAME'),
+                        sshUserPrivateKey(credentialsId: "devops_prod_key", keyFileVariable: 'KEY_FILE', usernameVariable:'USERNAME'),
                         string(credentialsId: "devops_prod_address", variable: 'SERVER_ADDRESS')
                     ]
                 ) {
