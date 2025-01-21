@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         IMAGE_NAME = "ivanegorov22/django_deno"
+        PROJECT_NAME = "common_django"
     }
     stages {
         stage("test") {
