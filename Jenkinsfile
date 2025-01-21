@@ -3,6 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = "ivanegorov22/django_deno"
         PROJECT_NAME = "common_django"
+        DOMAIN = "egorov.prod.mshp-devops.com"
     }
     stages {
         stage("test") {
